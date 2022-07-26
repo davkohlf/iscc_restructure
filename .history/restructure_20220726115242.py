@@ -167,7 +167,7 @@ try:
                     del(object_ValidCert)
 
 
-        print("Inserted = {},  Updated = {} ".format(count_insert, count_update))
+        print("Inserted = {},  Updatet = {} ".format(count_insert, count_update))
         print("Upgedatet:")
         print(list_update)
     except:

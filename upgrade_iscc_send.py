@@ -113,6 +113,7 @@ from email.mime.application import MIMEApplication
 #https://stackoverflow.com/questions/16968758/sending-email-to-a-microsoft-exchange-group-using-python
 #
 
+#testt
 
 def sendMail(sender,
              subject,

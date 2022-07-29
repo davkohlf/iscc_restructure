@@ -16,7 +16,7 @@ from email.mime.application import MIMEApplication
 
 #https://stackoverflow.com/questions/16968758/sending-email-to-a-microsoft-exchange-group-using-python
 #
-
+#fd
 #testt
 
 def sendMail(sender,

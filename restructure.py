@@ -215,7 +215,7 @@ except:
     ## Send mail to me
     
 
-    msg = "Problem bei Wget skript, oder bei {} ".format(fehler)
+    msg = "Problem bei Wget-Skript, oder bei {} ".format(fehler)
     #sendMail(sender="linux@muenzer.at",subject="Test", recipient=["ISCC_kaufmaennisch@muenzer.at"], username="",password="",message=msg,xlsx_files=save_name)
 
     send_mail.sendMail(sender="linux@muenzer.at",subject="Certificate Problems", recipient=["david.kohlfuerst@muenzer.at"], username="",password="",message=msg)

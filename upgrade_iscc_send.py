@@ -174,7 +174,7 @@ try:
 
     #print(save_name)
 except:
-    msg_ST = "Problem with Stefano-Group sending Mails"
+    msg_ST = "Problem with Stefano-Group sending Mails hat Probleme"
     sendMail(sender="linux@muenzer.at",subject="Stefano Group sending mail", recipient=["david.kohlfuerst@muenzer.at"], username="",password="",message=msg_ST)
 
 

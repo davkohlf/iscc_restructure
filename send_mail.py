@@ -1,5 +1,5 @@
 
-
+# Import needed packages
 ## Jetzt noch auto E-Mail verschicken
 import smtplib #nur für versand, das email muss zuvor noch aufgebaut werden
 import email.mime.text

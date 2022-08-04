@@ -1,5 +1,4 @@
 import difflib
-#from nis import cat
 import sys
 import pandas as pd
 import numpy as np
@@ -17,14 +16,10 @@ import datetime
 from datetime import date, datetime
 from datetime import timedelta
 
-import send_mail
-from send_mail import *
-#from send_mail import send_mail
-#
+try:
+        
 
-fehler = ""
-
-try: 
+    
 
     # Falls mal ein Tag nicht verschoben wurde
 
@@ -61,7 +56,7 @@ try:
     list_update = []
 
     mylist = [f for f in glob.glob("*.csv")]
-    #print(len(mylist))
+    print(len(mylist))
     if (len(mylist) > 0):
         try:
                 for i in mylist:
@@ -73,7 +68,6 @@ try:
                     df.to_excel(save_name, index=False)
         except:
             print("Can't convert csv to xlsx")
-            fehler = "Umwandlung in xlsx nicht möglich"
     else:
         sys.exit()
 
@@ -82,63 +76,38 @@ try:
 
         #Get all csv which are in the directory
         for i in mylist:
-            df_complete_all = pd.read_csv(str(i), sep=",")
-            df_complete_nan = df_complete_all.replace(r'^s*$',  np.nan, regex = True)
-            #print(df_complete_nan.head())
-            df_complete_empty = df_complete_nan.dropna(axis=0, how='all')
-            df_complete = df_complete_empty.fillna("")
-            df_complete.reset_index(inplace=True, drop=True)
-            #print(df_complete)
-            #print(df_complete)
+            df_complete = pd.read_csv(str(i), sep=",")
+
             list_header = df_complete.columns.values
             #print(list_header)
-            #print("----------------")
-            item_country = difflib.get_close_matches("Country",list_header)
+
+            item_country = difflib.get_close_matches("country",list_header)
             #print(item_country)
             # Jetzt überprüfen ob, im neuen Excel ein neues Land existiert und falls ja, hinzufügen
             list_countries = list(df_complete[item_country[0]])
-            #print(list_countries.index(np.nan))
             list_countries_unique = list(set(list_countries))
-            #print(list_countries_unique)
 
             # Implement new Countries to Database
             for j in range(len(list_countries_unique)):
-
                 country_pos_add = list_countries_unique[j]
                 obj_country = Country(Country=country_pos_add)
-                #print(country_pos_add)
+
                 count_object_country = obj_country.AskCountCountry(mydb) 
                 #print(count_object_country)
                 # Gehe jedes Land von SQL-Database durch und und wenn eines neu ist wird es hinzugefügt          
                 if(count_object_country[0][0] < 1):
                     obj_country.InsertSQLCountry(mydb)
-                    #print("Insert country")
-                #else:
-                #    print("Bereits vorhanden")
 
                 del obj_country
-        
+            
             # Wenn countries fertig, dann die Objekte einspielen
-            #print(df_complete.iloc[6375:6380,:])
-            #print(df_complete.shape)
             for k in range(df_complete.shape[0]):
 
-                    #df_get_single_NaN = copy.copy(df_complete.loc[k])
-                    #df_get_single = df_get_single_NaN
+                    df_get_single_NaN = copy.copy(df_complete.loc[k])
+
                     
-                    #if(k > 6376):
-                    #    print(df_complete.loc[k])
-
-
-                    df_get_single = df_complete.loc[k]
-                    #
                     #print(type(df_get_single))
-                    
-                    #try:
-                    #    df_get_single = df_get_single_NaN.fillna("")
-                    #except:
-                    #    pass
-                    
+                    df_get_single = df_get_single_NaN.fillna("")
                     #print(df_get_single)
                     #item_country = difflib.get_close_matches("country",list_header)
                     #print(list_header)
@@ -164,8 +133,6 @@ try:
                     object_ValidCert = ValidCertificate(Certificate=Certificate, Certificate_Holder=Certificate_Holder, Country=CountryName, Scope=Scope,Raw_Material=Raw_Material,
                     Add_Ons=Add_Ons,valid_from=valid_from, valid_until=valid_until,date_insert=date_insert, date_changed=date_changed, Checked=checked, Issuing_CB=Issuing_CB,
                     Products=Products, RawMat_Categ=RawMat_Categ,Status=Status)
-
-
 
                 
                     # Wenn das Certificate noch nicht in der Datenbank aufscheint -> neu hinzufügen
@@ -200,24 +167,12 @@ try:
                     del(object_ValidCert)
 
 
-        print("Inserted = {},  Updated = {} ".format(count_insert, count_update))
+        print("Inserted = {},  Updatet = {} ".format(count_insert, count_update))
         print("Upgedatet:")
         print(list_update)
-
-
     except:
         print("Can't integrate new File into SQL-Database")
-        fehler = "Can't upload to SQL - Server"
 
 
 except:
     print("Problem with the Python file")
-    ## Send mail to me
-    
-        #t
-    msg = "Problem bei Wget-Skript, oder bei {} ".format(fehler)
-    #sendMail(sender="linux@muenzer.at",subject="Test", recipient=["ISCC_kaufmaennisch@muenzer.at"], username="",password="",message=msg,xlsx_files=save_name)
-
-    send_mail.sendMail(sender="linux@muenzer.at",subject="Certificate Problems", recipient=["david.kohlfuerst@muenzer.at"], username="",password="",message=msg)
-
-#

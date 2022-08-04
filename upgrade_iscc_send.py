@@ -174,7 +174,7 @@ try:
 
     #print(save_name)
 except:
-    msg_ST = "Problem with Stefano-Group, certificates younger than 7 days make doesn't work"
+    msg_ST = "Problem with Stefano-Group, certificates younger than 7 days make doesn't work" #
     sendMail(sender="linux@muenzer.at",subject="Stefano Group sending mail", recipient=["david.kohlfuerst@muenzer.at"], username="",password="",message=msg_ST)
 
 

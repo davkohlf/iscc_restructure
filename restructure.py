@@ -20,7 +20,7 @@ from datetime import timedelta
 import send_mail
 from send_mail import *
 #from send_mail import send_mail
-
+#
 
 fehler = ""
 

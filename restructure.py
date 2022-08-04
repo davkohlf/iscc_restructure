@@ -1,4 +1,3 @@
-import debugpy
 import difflib
 import sys
 import pandas as pd
@@ -18,7 +17,7 @@ from datetime import date, datetime
 from datetime import timedelta
 
 # enable remote debugging: see https://docs.microsoft.com/en-us/visualstudio/python/debugging-python-code-on-remote-linux-machines?view=vs-2022
-debugpy.listen(5678)
+#debugpy.listen(5678)
 
 try:
         

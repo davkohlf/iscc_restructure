@@ -168,13 +168,13 @@ try:
     msg = "Im Anhang befindet sich das neue Excel-File "
     #sendMail(sender="linux@muenzer.at",subject="Test", recipient=["ISCC_kaufmaennisch@muenzer.at"], username="",password="",message=msg,xlsx_files=save_name)
 
-    sendMail(sender="linux@muenzer.at",subject="Test", recipient=["david.kohlfuerst@muenzer.at"], username="",password="",message=msg,xlsx_files=save_name)
+    sendMail(sender="linux@muenzer.at",subject="Test", recipient=["david.kohlfuerst@muenzer.at","stefan.pirker@muenzer.at"], username="",password="",message=msg,xlsx_files=save_name)
 
     #["david.kohlfuerst@muenzer.at","selina.edelsbrunner@muenzer.at","patrick.seyer@muenzer.at"
 
     #print(save_name)
 except:
-    msg_ST = "Problem with Stefano-Group sending Mails hat Probleme"
+    msg_ST = "Problem with Stefano-Group, certificates younger than 7 days make doesn't work"
     sendMail(sender="linux@muenzer.at",subject="Stefano Group sending mail", recipient=["david.kohlfuerst@muenzer.at"], username="",password="",message=msg_ST)
 
 
